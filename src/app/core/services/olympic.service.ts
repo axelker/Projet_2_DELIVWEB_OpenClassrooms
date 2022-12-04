@@ -12,9 +12,9 @@ export class OlympicService {
 
   constructor(private http: HttpClient) {}
 
-  loadInitialData() : Observable<[OlympicCountry]>  {
+  public loadInitialData() : Observable<[OlympicCountry]>  {
     return this.http.get<[OlympicCountry]>(this.olympicUrl).pipe(
-      tap((value) => this.olympics$.next(value)),
+      tap((value : [OlympicCountry]) => this.olympics$.next(value)),
       catchError((error, caught) => {
         // TODO: improve error handling
         console.error(error);
@@ -25,7 +25,10 @@ export class OlympicService {
     );
   }
 
-  getOlympics() : Observable<[OlympicCountry]> {
+  public getOlympics() : Observable<[OlympicCountry]> {
     return this.olympics$.asObservable();
   }
+
+  
+
 }

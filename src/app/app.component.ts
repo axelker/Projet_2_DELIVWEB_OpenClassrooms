@@ -1,5 +1,5 @@
 import { Component, OnInit,OnDestroy } from '@angular/core';
-import { take } from 'rxjs';
+import { Subscription, take } from 'rxjs';
 import { OlympicService } from './core/services/olympic.service';
 
 @Component({
@@ -8,13 +8,14 @@ import { OlympicService } from './core/services/olympic.service';
   styleUrls: ['./app.component.scss'],
 })
 export class AppComponent implements OnInit,OnDestroy {
+  subscribe! : Subscription;
   constructor(private olympicService: OlympicService) {}
 
   ngOnInit(): void {
-    this.olympicService.loadInitialData().pipe(take(1)).subscribe();
+    this.subscribe = this.olympicService.loadInitialData().pipe(take(1)).subscribe();
   }
 
   ngOnDestroy() : void {
-
+    this.subscribe.unsubscribe();
   }
 }
