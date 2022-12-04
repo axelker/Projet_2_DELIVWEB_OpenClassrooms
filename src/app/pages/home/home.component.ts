@@ -1,7 +1,7 @@
 import { Component, OnInit,OnDestroy } from '@angular/core';
 import { Observable, of, Subscription } from 'rxjs';
 import { OlympicService } from 'src/app/core/services/olympic.service';
-import { OlympicCountry } from 'src/app/core/models/OlympicCountry';
+import { OlympicCountry } from 'src/app/core/models/interfaces/OlympicCountry';
 
 @Component({
   selector: 'app-home',
@@ -16,40 +16,17 @@ export class HomeComponent implements OnInit,OnDestroy {
 
   ngOnInit(): void {
     this.olympics$ = this.olympicService.getOlympics(); 
-    this.arrayOlympics = [
-      {
-        "id": 1,
-        "country": "Italy",
-        "participations": [
-          {
-            "id": 1,
-            "year": 2012,
-            "city": "Londres",
-            "medalsCount": 28,
-            "athleteCount": 372
-          },
-          {
-            "id": 2,
-            "year": 2016,
-            "city": "Rio de Janeiro",
-            "medalsCount": 28,
-            "athleteCount": 375
-          },
-          {
-            "id": 3,
-            "year": 2020,
-            "city": "Tokyo",
-            "medalsCount": 40,
-            "athleteCount": 381
-          }
-        ]
-      }];
+    this.suscribe = this.olympics$.subscribe({
+      next: (olympicCountry: [OlympicCountry]) => this.arrayOlympics=olympicCountry,
+      error: (err: Error) => this.arrayOlympics=[],
+      complete: () => console.log('Observer got a complete notification'),
+    });
     
     
     
   }
   ngOnDestroy(): void {
-    
+    this.suscribe.unsubscribe();
   }
 
   

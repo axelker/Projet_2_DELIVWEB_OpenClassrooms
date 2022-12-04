@@ -1,5 +1,12 @@
-<h2>Medals per Country</h2>
-<hr />
-<p>{{ (olympics$ | async)?.length }} data loaded</p>
 
-<app-pie-dashboard-olympic [arrayOlympics]="arrayOlympics"></app-pie-dashboard-olympic>
+
+
+<div *ngIf="arrayOlympics!=undefined">
+    <app-pie-dashboard-olympic [arrayOlympics]="arrayOlympics"></app-pie-dashboard-olympic>
+</div>
+
+<div *ngIf="arrayOlympics==undefined || arrayOlympics==null ">
+    <app-not-found></app-not-found>
+</div>
+
+<!-- ERROR PAGE TODO-->
