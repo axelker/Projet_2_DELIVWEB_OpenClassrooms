@@ -7,10 +7,12 @@ import { CoreModule } from './core/core.module';
 import { DashbordModule } from './features/dashboard/dashbord.module';
 import { HomeComponent } from './pages/home/home.component';
 import { NotFoundComponent } from './pages/not-found/not-found.component';
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+import { ErrorComponent } from './pages/error/error.component';
 
 @NgModule({
-  declarations: [AppComponent, HomeComponent, NotFoundComponent],
-  imports: [BrowserModule, AppRoutingModule, HttpClientModule,CoreModule,DashbordModule],
+  declarations: [AppComponent, HomeComponent, NotFoundComponent, ErrorComponent],
+  imports: [BrowserModule, AppRoutingModule, HttpClientModule,CoreModule,DashbordModule,BrowserAnimationsModule],
   providers: [],
   bootstrap: [AppComponent],
 })

@@ -12,14 +12,18 @@ export class HomeComponent implements OnInit,OnDestroy {
   public olympics$!: Observable<[OlympicCountry]>;
   public arrayOlympics!: Array<OlympicCountry>;
   private suscribe!: Subscription;
+
   constructor(private olympicService: OlympicService) {}
 
   ngOnInit(): void {
     this.olympics$ = this.olympicService.getOlympics(); 
-    this.suscribe = this.olympics$.subscribe({
-      next: (olympicCountry: [OlympicCountry]) => this.arrayOlympics=olympicCountry,
-      error: (err: Error) => this.arrayOlympics=[],
-      complete: () => console.log('Observer got a complete notification'),
+    this.suscribe = this.olympics$.subscribe({      
+      next: (olympicCountry: [OlympicCountry]) => {
+        this.arrayOlympics=olympicCountry;
+      },
+      error: (err: Error) =>  { 
+        this.arrayOlympics=[]; 
+      },
     });
     
     
