@@ -8,7 +8,7 @@ import { OlympicCountry } from '../models/interfaces/OlympicCountry';
 })
 export class OlympicService {
   private olympicUrl = './assets/mock/olympic.json';
-  private olympics$ = new BehaviorSubject<any>(undefined);
+  private olympics$ = new BehaviorSubject<[OlympicCountry] | undefined>(undefined);
 
   constructor(private http: HttpClient) {}
 
@@ -21,7 +21,7 @@ export class OlympicService {
     );
   }
 
-  public getOlympics() : Observable<[OlympicCountry]> {
+  public getOlympics() : Observable<[OlympicCountry] | undefined> {
     return this.olympics$.asObservable();
   }
 

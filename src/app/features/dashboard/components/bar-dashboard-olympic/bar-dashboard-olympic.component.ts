@@ -2,6 +2,7 @@ import { Component, Input, OnDestroy, OnInit } from '@angular/core';
 import {Router, ActivatedRoute } from '@angular/router';
 import { filter, Subscription } from 'rxjs';
 import { Country } from 'src/app/core/models/class/Country';
+import { DataChart } from 'src/app/core/models/interfaces/DataChart';
 import { OlympicCountry } from 'src/app/core/models/interfaces/OlympicCountry';
 import { OlympicService } from 'src/app/core/services/olympic.service';
 
@@ -18,7 +19,7 @@ export class BarDashboardOlympicComponent implements OnInit,OnDestroy {
   nbAthletes : number | null = null;
   multi: any[] = [];
    // options
-   legend: boolean = true;
+   legend: boolean = false;
    showLabels: boolean = true;
    animations: boolean = true;
    xAxis: boolean = true;
@@ -47,6 +48,7 @@ export class BarDashboardOlympicComponent implements OnInit,OnDestroy {
 
 
   }
+  //Get the id of current country
   initIdToSearch() : void {
     this.routeSub = this.activatedRoute.params.subscribe(params => {
       let id : number = Number(params['id']);
@@ -55,10 +57,11 @@ export class BarDashboardOlympicComponent implements OnInit,OnDestroy {
       }
     });
   }
+  //Init the data of the country  
   initCountry() : void{
   
     this.countrySuscribe = this.olympicService.getOlympics().subscribe({
-      next: (olympicCountry: [OlympicCountry]) => {
+      next: (olympicCountry: [OlympicCountry] | undefined) => {
        // Filter on the id in parameter to found the country
         if(olympicCountry) {
           this.country = olympicCountry.filter(country => {
@@ -80,16 +83,16 @@ export class BarDashboardOlympicComponent implements OnInit,OnDestroy {
     });
     
   }
-
+  //Init the bart char with the data of country in parmeters
   initBarChart(country : OlympicCountry): void {
-      let series : Array<any> =[];
+      let series : Array<DataChart> =[];
       let countMedals : number = 0;
       let countAthlets : number = 0;
       //Init the series in chart with participations JOs 
       for(let i =0;i<country.participations.length;i++){
         series.push({
-          "name" : country.participations[i].year,
-          "value" :country.participations[i].medalsCount
+          "name" : "" +country.participations[i].year,
+          "value" :  country.participations[i].medalsCount
       });
         countMedals += country.participations[i].medalsCount;
         countAthlets+= country.participations[i].athleteCount;
@@ -122,7 +125,7 @@ export class BarDashboardOlympicComponent implements OnInit,OnDestroy {
   }
 
   goBack(): void {
-    this.router.navigateByUrl("");
+    this.router.navigate([".."]);
   }
   ngOnDestroy(): void {
     this.countrySuscribe.unsubscribe();

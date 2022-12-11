@@ -1,22 +1,36 @@
-
-<button (click)="goBack()">X</button>
-<p>Number of entries {{nbParticipations}}</p>
-<p>Total number of medals {{nbMedals}}</p>
-<p>Total number of athletes {{nbAthletes}}</p>
-
-<ngx-charts-line-chart
-  [view]="view"
-  [legend]="legend"
-  [showXAxisLabel]="showXAxisLabel"
-  [showYAxisLabel]="showYAxisLabel"
-  [xAxis]="xAxis"
-  [yAxis]="yAxis"
-  [xAxisLabel]="xAxisLabel"
-  [yAxisLabel]="yAxisLabel"
-  [timeline]="timeline"
-  [results]="multi"
-  (select)="onSelect($event)"
-  (activate)="onActivate($event)"
-  (deactivate)="onDeactivate($event)"
-  >
-</ngx-charts-line-chart>
+<div class="content">
+  <button class="button-cross" (click)="goBack()">X</button>
+  <div class="center">
+    <h2 class="chart-title">{{country!.country}}</h2>
+    <div class="number-legend">
+      <div class="number" *ngIf="nbParticipations">
+        <span class="nb-title">Number of entries  </span>
+        <span class="nb-value">{{nbParticipations}} </span>
+      </div>
+      <div class="number" *ngIf="nbMedals">
+        <span class="nb-title">Total number of medals</span> 
+        <span class="nb-value">{{nbMedals}} </span>
+        </div>
+      <div class="number" *ngIf="nbAthletes">
+        <span class="nb-title">Total number of athletes</span>
+        <span class="nb-value">{{nbAthletes}}</span> 
+      </div> 
+    </div>
+    <ngx-charts-line-chart
+      [view]="view"
+      [legend]="legend"
+      [showXAxisLabel]="showXAxisLabel"
+      [showYAxisLabel]="showYAxisLabel"
+      [xAxis]="xAxis"
+      [yAxis]="yAxis"
+      [xAxisLabel]="xAxisLabel"
+      [yAxisLabel]="yAxisLabel"
+      [timeline]="timeline"
+      [results]="multi"
+      (select)="onSelect($event)"
+      (activate)="onActivate($event)"
+      (deactivate)="onDeactivate($event)"
+      >
+    </ngx-charts-line-chart>
+  </div>
+</div>

@@ -1,0 +1,39 @@
+.error-page {
+position: absolute;
+left: 50%;
+top: 50%;
+transform: translate(-50%,-50%);
+text-align: center;
+padding: 2rem;
+
+
+
+}
+.error-page  h3 {
+    font-family: cabin,sans-serif;
+    position: relative;
+    font-size: 16px;
+    font-weight: 700;
+    text-transform: uppercase;
+    color: #262626;
+    margin: 0;
+    letter-spacing: 3px;
+    padding-left: 6px;
+}
+
+.error-page .title {
+    position: relative;
+    margin: -5%;
+    font-size: 50px;
+}
+
+
+
+.error-page .error-text {
+    font-size: 20px;
+    font-weight: 400;
+    text-transform: uppercase;
+    color: #000;
+    margin-top: 0;
+    margin-bottom: 25px;
+}

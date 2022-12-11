@@ -1,9 +1,106 @@
 /* You can add global styles to this file, and also import other style files */
+
+:root{
+  --main-color: #178287;
+}
+
+.content {
+  width: 80%;
+  height: 90%;
+  border: solid var(--main-color);
+  margin: auto;
+}
 .center {
-    width: 100vw;
-    height: 100vh;
+    
     display: flex;
     justify-content: center;
     align-items: center;
     flex-direction: column;
+    margin: auto;
   }
+
+
+  .button-back {
+    padding: 5px;
+    background-color: var( --main-color);
+    border-radius: 4px;
+    border-color: var( --main-color);
+    font-size: 15px;
+    cursor: pointer;
+  }
+  .button-cross {
+    background-color: var( --main-color);
+    border-color: var( --main-color);
+    color: gray;
+    cursor: pointer;
+  }
+
+  .chart-title {
+    background-color: var(--main-color);
+    color: white;
+    padding: 8px;
+    border-radius: 5px;
+}
+
+  .number-legend {
+      display: flex;
+      gap: 40px;
+      margin-bottom: 2%;
+      margin-top: 2%;
+  }
+  .number {
+      border: solid var(--main-color);
+      border-radius: 5px;
+      padding: 7px;
+      text-align: center;
+  }
+  .nb-title{
+      color: gray;
+      margin-bottom:5px ;
+      display:block ;
+
+  }
+  .nb-value {
+      color: black;
+      font-weight: bold;
+  }
+
+  .error-page {
+    position: absolute;
+    left: 50%;
+    top: 50%;
+    transform: translate(-50%,-50%);
+    text-align: center;
+    padding: 2rem;
+    
+    
+    
+    }
+    .error-page  h3 {
+        font-family: cabin,sans-serif;
+        position: relative;
+        font-size: 16px;
+        font-weight: 700;
+        text-transform: uppercase;
+        color: #262626;
+        margin: 0;
+        letter-spacing: 3px;
+        padding-left: 6px;
+    }
+    
+    .error-page .title {
+        position: relative;
+        margin: -5%;
+        font-size: 50px;
+    }
+    
+    
+    
+    .error-page .error-text {
+        font-size: 20px;
+        font-weight: 400;
+        text-transform: uppercase;
+        color: #000;
+        margin-top: 0;
+        margin-bottom: 25px;
+    }

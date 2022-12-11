@@ -1,22 +1,37 @@
-<h2>Medals per Country</h2>
-<hr />
-<p> Number of Country {{ arrayOlympics.length }} </p>
-<p *ngIf="nbOfJOs!=null"> Number of JOs {{ nbOfJOs }} </p>
-<p *ngIf="nbOfJOs==null"> Number of JOs is not the same for all Country ! </p>
+<div class="content">
+  <div class="center">
+    <h2 class="chart-title">Medals per Country</h2>
+    <div class="number-legend">
+      <div class="number" *ngIf="nbOfJOs!=null">
+        <span class="nb-title">Number of JOs </span>
+        <span class="nb-value">{{ nbOfJOs }} </span>
+      </div>
+      <div class="number" *ngIf="nbOfJOs==null">
+        <span class="nb-value">Number of JOs is not the same for all Country !</span> 
+      </div>
+      <div class="number" *ngIf="arrayOlympics">
+        <span class="nb-title">Number of countries</span>
+        <span class="nb-value">{{ arrayOlympics.length }}</span> 
+      </div>  
+    </div>
+    
 
-<div class="pie-chart">
-  <ngx-charts-pie-chart
-  [view]="view"
-  [results]="single"
-  [gradient]="gradient"
-  [legend]="showLegend"
-  [labels]="showLabels"
-  [doughnut]="isDoughnut"
-  (select)="onSelect($event)"
-  (activate)="onActivate($event)"
-  (deactivate)="onDeactivate($event)"
-  >
-</ngx-charts-pie-chart>
+    <ngx-charts-pie-chart
+      [view]="view"
+      [results]="single"
+      [gradient]="gradient"
+      [legend]="showLegend"
+      [labels]="showLabels"
+      [doughnut]="isDoughnut"
+      [legendPosition]="legendPosition"
+      (select)="onSelect($event)"
+      (activate)="onActivate($event)"
+      (deactivate)="onDeactivate($event)"
+    >
+    </ngx-charts-pie-chart>
+    
+  </div>
 </div>
+
 
 

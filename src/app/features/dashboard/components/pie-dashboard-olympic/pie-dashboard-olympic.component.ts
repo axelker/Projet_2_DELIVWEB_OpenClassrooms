@@ -1,32 +1,62 @@
-import { Component, OnInit,Input, } from '@angular/core';
+import { Component, OnInit,Input, OnDestroy, } from '@angular/core';
 import { OlympicCountry } from 'src/app/core/models/interfaces/OlympicCountry';
 import OlympicCountryUtils from 'src/app/core/utils/OlympicCountryUtils';
 import { Country } from 'src/app/core/models/class/Country';
 import { Router } from '@angular/router';
+import { Observable, Subscription } from 'rxjs';
+import { OlympicService } from 'src/app/core/services/olympic.service';
+import { DataChart } from 'src/app/core/models/interfaces/DataChart';
+import { LegendPosition } from '@swimlane/ngx-charts';
 @Component({
   selector: 'app-pie-dashboard-olympic',
   templateUrl: './pie-dashboard-olympic.component.html',
   styleUrls: ['./pie-dashboard-olympic.component.scss']
 })
-export class PieDashboardOlympicComponent implements OnInit {
-  @Input()
-  arrayOlympics! : Array<OlympicCountry | null>;
+export class PieDashboardOlympicComponent implements OnInit,OnDestroy {
+  
+  public arrayOlympics! : Array<OlympicCountry | null>;
+  private suscribe!: Subscription;
+  private olympics$!: Observable<[OlympicCountry] | undefined>;
+
+
 
   nbOfJOs : number | null = null;
 
   
   view: [number,number] = [900,400];
-  single!: Array<any>;
+  single!: Array<DataChart>;
 
   // options
   gradient: boolean = false;
   showLegend: boolean = true;
   showLabels: boolean = true;
   isDoughnut: boolean = false;
+  legendPosition: LegendPosition = LegendPosition.Below;
   
 
-  constructor(private router : Router) {
+  constructor(private router : Router,private olympicService: OlympicService) {
     
+  }
+  
+  ngOnInit(): void {
+    this.initDataArrayOlympics();
+    Object.assign(this, this.single );
+  }
+
+  //init the data in array 
+  initDataArrayOlympics() : void{
+    this.olympics$ = this.olympicService.getOlympics(); 
+    this.suscribe = this.olympics$.subscribe({      
+      next: (olympicCountry: [OlympicCountry] | undefined) => {
+        if(olympicCountry){
+          this.arrayOlympics=olympicCountry;
+          this.initPie();
+        }
+      },
+      error: (err: Error) =>  { 
+        this.arrayOlympics=[]; 
+      },
+    });
   }
 
   //Init the data of the pie chart 
@@ -38,8 +68,8 @@ export class PieDashboardOlympicComponent implements OnInit {
       arrayNumberParticipation.push(OlympicCountryUtils.getNbJOs(this.arrayOlympics[i]?.participations));
       this.single.push(
         { 
-          "name" : this.arrayOlympics[i]?.country,
-          "value" : this.arrayOlympics[i]?.participations.reduce((total, participation) => total + participation.medalsCount,0)
+          "name" : "" + this.arrayOlympics[i]!.country,
+          "value" : this.arrayOlympics[i]!.participations.reduce((total, participation) => total + participation.medalsCount,0)
         });
     }
 
@@ -54,29 +84,35 @@ export class PieDashboardOlympicComponent implements OnInit {
   
 
 
-  onSelect(data : any): void {
+  onSelect(data : DataChart | string): void {
     console.log('Item clicked', JSON.parse(JSON.stringify(data)));
-    //ROUTING VERS ID 
-    let country : Country | undefined = OlympicCountryUtils.getCountryByName(data.name,this.arrayOlympics);
+    let country : Country | undefined = undefined;
+
+    //Check the type to get the country by name
+    if(typeof data === "string"){
+      country  = OlympicCountryUtils.getCountryByName(data,this.arrayOlympics);
+    }
+    else {
+      country  = OlympicCountryUtils.getCountryByName(data.name,this.arrayOlympics);
+    }
     
+    //Routing to the country by her ID 
     if(country!=undefined){
-      console.log(country);
       this.router.navigateByUrl('/country/'+country.getId());
     }
     
   }
 
   onActivate(data : any): void {
-    console.log('Activate', JSON.parse(JSON.stringify(data)));
   }
 
   onDeactivate(data: any ): void {
-    console.log('Deactivate', JSON.parse(JSON.stringify(data)));
   }
 
-  ngOnInit(): void {
-    this.initPie();
-    Object.assign(this, this.single );
+ 
+
+  ngOnDestroy(): void {
+    this.suscribe.unsubscribe();
   }
 
 }

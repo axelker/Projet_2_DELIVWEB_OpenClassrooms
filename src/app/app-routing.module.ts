@@ -11,6 +11,9 @@ const routes: Routes = [
     component: HomeComponent,
   },
   {
+    path: 'country',   redirectTo: '', pathMatch: 'full'
+  },
+  {
    path: 'country/:id', component: BarDashboardOlympicComponent 
   },
   {

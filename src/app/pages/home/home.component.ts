@@ -8,30 +8,16 @@ import { OlympicCountry } from 'src/app/core/models/interfaces/OlympicCountry';
   templateUrl: './home.component.html',
   styleUrls: ['./home.component.scss'],
 })
-export class HomeComponent implements OnInit,OnDestroy {
-  public olympics$!: Observable<[OlympicCountry]>;
-  public arrayOlympics!: Array<OlympicCountry>;
-  private suscribe!: Subscription;
-
-  constructor(private olympicService: OlympicService) {}
+export class HomeComponent implements OnInit {
+ 
+  constructor() {}
 
   ngOnInit(): void {
-    this.olympics$ = this.olympicService.getOlympics(); 
-    this.suscribe = this.olympics$.subscribe({      
-      next: (olympicCountry: [OlympicCountry]) => {
-        this.arrayOlympics=olympicCountry;
-      },
-      error: (err: Error) =>  { 
-        this.arrayOlympics=[]; 
-      },
-    });
-    
+     
     
     
   }
-  ngOnDestroy(): void {
-    this.suscribe.unsubscribe();
-  }
+
 
   
 
