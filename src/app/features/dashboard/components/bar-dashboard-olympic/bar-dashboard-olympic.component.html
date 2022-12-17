@@ -1,4 +1,4 @@
-<div class="content">
+<div #ContainerRef class="content">
   <button class="button-cross" (click)="goBack()">X</button>
   <div class="center">
     <h2 class="chart-title">{{country!.country}}</h2>
@@ -17,6 +17,7 @@
       </div> 
     </div>
     <ngx-charts-line-chart
+      (window:resize)="resizeChart(ContainerRef.offsetWidth)"
       [view]="view"
       [legend]="legend"
       [showXAxisLabel]="showXAxisLabel"

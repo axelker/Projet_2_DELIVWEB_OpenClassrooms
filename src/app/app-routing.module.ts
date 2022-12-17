@@ -7,14 +7,7 @@ import { NotFoundComponent } from './pages/not-found/not-found.component';
 
 const routes: Routes = [
   {
-    path: '',
-    component: HomeComponent,
-  },
-  {
-    path: 'country',   redirectTo: '', pathMatch: 'full'
-  },
-  {
-   path: 'country/:id', component: BarDashboardOlympicComponent 
+    path: '',loadChildren: () => import('./features/dashboard/dashbord.module').then(m => m.DashbordModule)
   },
   {
     path:'error', component : ErrorComponent

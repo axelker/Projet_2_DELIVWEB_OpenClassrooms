@@ -23,7 +23,7 @@ export class PieDashboardOlympicComponent implements OnInit,OnDestroy {
   nbOfJOs : number | null = null;
 
   
-  view: [number,number] = [900,400];
+  view!: [number,number];
   single!: Array<DataChart>;
 
   // options
@@ -35,7 +35,7 @@ export class PieDashboardOlympicComponent implements OnInit,OnDestroy {
   
 
   constructor(private router : Router,private olympicService: OlympicService) {
-    
+    this.resizeChart(innerWidth / 1.3);
   }
   
   ngOnInit(): void {
@@ -114,5 +114,22 @@ export class PieDashboardOlympicComponent implements OnInit,OnDestroy {
   ngOnDestroy(): void {
     this.suscribe.unsubscribe();
   }
+
+  resizeChart(width : number){
+    this.view = [width, 400];
+    if( width<=600){
+      this.showLegend=false;
+    }
+    if(width<700 && width>600){
+      this.showLegend=true;
+      this.legendPosition = LegendPosition.Right;
+    }
+    if(width>=700){
+      this.showLegend=true;
+      this.legendPosition = LegendPosition.Below;
+    }
+  }
+
+
 
 }

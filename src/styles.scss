@@ -4,20 +4,16 @@
   --main-color: #178287;
 }
 
+
 .content {
-  width: 80%;
   height: 90%;
   border: solid var(--main-color);
   margin: auto;
+  display: flex;
+  align-items: center;
+  flex-direction: column;
+
 }
-.center {
-    
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    flex-direction: column;
-    margin: auto;
-  }
 
 
   .button-back {
@@ -40,6 +36,7 @@
     color: white;
     padding: 8px;
     border-radius: 5px;
+    text-align: center;
 }
 
   .number-legend {
@@ -47,6 +44,8 @@
       gap: 40px;
       margin-bottom: 2%;
       margin-top: 2%;
+      justify-content: center;
+
   }
   .number {
       border: solid var(--main-color);

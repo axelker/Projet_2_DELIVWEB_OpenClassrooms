@@ -39,6 +39,8 @@ export class BarDashboardOlympicComponent implements OnInit,OnDestroy {
 
   constructor(private router:Router, private activatedRoute:ActivatedRoute,private olympicService: OlympicService ) 
   {  
+    this.resizeChart(innerWidth / 1.3);
+
   }
 
   ngOnInit(): void {
@@ -130,6 +132,10 @@ export class BarDashboardOlympicComponent implements OnInit,OnDestroy {
   ngOnDestroy(): void {
     this.countrySuscribe.unsubscribe();
     this.routeSub.unsubscribe();
+  }
+
+  resizeChart(width : number){
+    this.view = [width, 400];
   }
 
 }

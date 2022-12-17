@@ -1,5 +1,4 @@
-<div class="content">
-  <div class="center">
+<div #ContainerRef  class="content">
     <h2 class="chart-title">Medals per Country</h2>
     <div class="number-legend">
       <div class="number" *ngIf="nbOfJOs!=null">
@@ -14,9 +13,11 @@
         <span class="nb-value">{{ arrayOlympics.length }}</span> 
       </div>  
     </div>
-    
-
-    <ngx-charts-pie-chart
+  
+   
+      <ngx-charts-pie-chart
+      
+      (window:resize)="resizeChart(ContainerRef.offsetWidth)"
       [view]="view"
       [results]="single"
       [gradient]="gradient"
@@ -29,9 +30,9 @@
       (deactivate)="onDeactivate($event)"
     >
     </ngx-charts-pie-chart>
-    
-  </div>
 </div>
+
+
 
 
 
