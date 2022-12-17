@@ -1,7 +1,6 @@
 import { Component, Input, OnDestroy, OnInit } from '@angular/core';
 import {Router, ActivatedRoute } from '@angular/router';
-import { filter, Subscription } from 'rxjs';
-import { Country } from 'src/app/core/models/class/Country';
+import { Subscription } from 'rxjs';
 import { DataChart } from 'src/app/core/models/interfaces/DataChart';
 import { OlympicCountry } from 'src/app/core/models/interfaces/OlympicCountry';
 import { OlympicService } from 'src/app/core/services/olympic.service';
@@ -12,35 +11,32 @@ import { OlympicService } from 'src/app/core/services/olympic.service';
   styleUrls: ['./bar-dashboard-olympic.component.scss']
 })
 export class BarDashboardOlympicComponent implements OnInit,OnDestroy {
-
+  
+  private countrySuscribe!: Subscription;
+  private routeSub!: Subscription;
+  private idToSearch:number | null = null;
   country : OlympicCountry | null = null;
   nbParticipations : number | null = null;
   nbMedals : number | null = null;
   nbAthletes : number | null = null;
+  
+  // attributs of charts 
   multi: any[] = [];
-   // options
-   legend: boolean = false;
-   showLabels: boolean = true;
-   animations: boolean = true;
-   xAxis: boolean = true;
-   yAxis: boolean = true;
-   showYAxisLabel: boolean = true;
-   showXAxisLabel: boolean = true;
-   xAxisLabel: string = 'Year';
-   yAxisLabel: string = 'Medals count';
-   timeline: boolean = true;
-  private countrySuscribe!: Subscription;
-  private routeSub!: Subscription;
-  private idToSearch:number | null = null;
-
-
-
-  view: [number,number] = [700, 300];
-
+  view!: [number,number];
+  legend: boolean = false;
+  showLabels: boolean = true;
+  animations: boolean = true;
+  xAxis: boolean = true;
+  yAxis: boolean = true;
+  showYAxisLabel: boolean = true;
+  showXAxisLabel: boolean = true;
+  xAxisLabel: string = 'Year';
+  yAxisLabel: string = 'Medals count';
+  timeline: boolean = true;
+  
   constructor(private router:Router, private activatedRoute:ActivatedRoute,private olympicService: OlympicService ) 
   {  
-    this.resizeChart(innerWidth / 1.3);
-
+    this.resizeChart(window.innerWidth / 1.3);
   }
 
   ngOnInit(): void {
@@ -50,7 +46,7 @@ export class BarDashboardOlympicComponent implements OnInit,OnDestroy {
 
 
   }
-  //Get the id of current country
+  //Get the id of current country by the params in route
   initIdToSearch() : void {
     this.routeSub = this.activatedRoute.params.subscribe(params => {
       let id : number = Number(params['id']);
@@ -109,21 +105,6 @@ export class BarDashboardOlympicComponent implements OnInit,OnDestroy {
         "series": series
     }];
   
-  }
-
- 
-
-
-  onSelect(data :any): void {
-    console.log('Item clicked', JSON.parse(JSON.stringify(data)));
-  }
-
-  onActivate(data :any): void {
-    console.log('Activate', JSON.parse(JSON.stringify(data)));
-  }
-
-  onDeactivate(data :any): void {
-    console.log('Deactivate', JSON.parse(JSON.stringify(data)));
   }
 
   goBack(): void {

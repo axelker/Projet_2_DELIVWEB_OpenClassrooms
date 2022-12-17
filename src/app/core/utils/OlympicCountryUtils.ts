@@ -8,7 +8,7 @@ export default class OlympicCountryUtils {
     static getNbCountry(arrayOlympics : Array<OlympicCountry>) : number {
         return arrayOlympics.length;
     }
-    // Get the number of jos for the participation of on Country
+    // Get the number of JOs for the participation of on Country
     static getNbJOs(participation : Array<Participation>| undefined): number {
         return participation==undefined? 0 : participation.length;
     }
@@ -20,7 +20,6 @@ export default class OlympicCountryUtils {
     // Get country by name
     static getCountryByName(name : String,arrayOlympicCountry : Array<OlympicCountry | null>) : Country | undefined {
         for(let i =0;i<arrayOlympicCountry.length;i++){
-            //olympicCoutry : OlympicCountry;
             if( name===arrayOlympicCountry[i]?.country){
                 return new Country(arrayOlympicCountry[i]!.id,arrayOlympicCountry[i]!.country,arrayOlympicCountry[i]!.participations);
             }

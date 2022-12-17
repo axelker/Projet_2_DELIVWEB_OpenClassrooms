@@ -17,7 +17,6 @@ export class ErrorComponent implements OnInit {
   initError() : void{
     //Get the error passed in the route
     if(history.state.data){
-      
       this.error = history.state.data;
     }
     else {

@@ -1,4 +1,4 @@
-import { Component, OnInit,Input, OnDestroy, } from '@angular/core';
+import { Component, OnInit, OnDestroy, } from '@angular/core';
 import { OlympicCountry } from 'src/app/core/models/interfaces/OlympicCountry';
 import OlympicCountryUtils from 'src/app/core/utils/OlympicCountryUtils';
 import { Country } from 'src/app/core/models/class/Country';
@@ -17,16 +17,12 @@ export class PieDashboardOlympicComponent implements OnInit,OnDestroy {
   public arrayOlympics! : Array<OlympicCountry | null>;
   private suscribe!: Subscription;
   private olympics$!: Observable<[OlympicCountry] | undefined>;
-
-
-
   nbOfJOs : number | null = null;
 
-  
+
+  // Atributes of charts
   view!: [number,number];
   single!: Array<DataChart>;
-
-  // options
   gradient: boolean = false;
   showLegend: boolean = true;
   showLabels: boolean = true;
@@ -35,7 +31,7 @@ export class PieDashboardOlympicComponent implements OnInit,OnDestroy {
   
 
   constructor(private router : Router,private olympicService: OlympicService) {
-    this.resizeChart(innerWidth / 1.3);
+    this.resizeChart(window.innerWidth / 1.3);
   }
   
   ngOnInit(): void {
@@ -43,7 +39,7 @@ export class PieDashboardOlympicComponent implements OnInit,OnDestroy {
     Object.assign(this, this.single );
   }
 
-  //init the data in array 
+  //init the data of all countries in array 
   initDataArrayOlympics() : void{
     this.olympics$ = this.olympicService.getOlympics(); 
     this.suscribe = this.olympics$.subscribe({      
@@ -80,15 +76,11 @@ export class PieDashboardOlympicComponent implements OnInit,OnDestroy {
     
   }
  
-
-  
-
-
+  //Click on country
   onSelect(data : DataChart | string): void {
-    console.log('Item clicked', JSON.parse(JSON.stringify(data)));
     let country : Country | undefined = undefined;
-
-    //Check the type to get the country by name
+    
+    //Check the type to get the country by name in legend
     if(typeof data === "string"){
       country  = OlympicCountryUtils.getCountryByName(data,this.arrayOlympics);
     }
@@ -102,14 +94,6 @@ export class PieDashboardOlympicComponent implements OnInit,OnDestroy {
     }
     
   }
-
-  onActivate(data : any): void {
-  }
-
-  onDeactivate(data: any ): void {
-  }
-
- 
 
   ngOnDestroy(): void {
     this.suscribe.unsubscribe();
