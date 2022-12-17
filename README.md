@@ -1,4 +1,11 @@
-# OlympicGamesStarter
+
+[![forthebadge](https://forthebadge.com/images/badges/cc-0.svg)](https://forthebadge.com)![angular](https://user-images.githubusercontent.com/68741077/208265814-25811189-7af9-47e2-9fa0-3a1282643355.svg) ![ngx-chart](https://user-images.githubusercontent.com/68741077/208265850-4a6a10a9-9c30-4d8a-b084-22875b842a6e.svg)
+
+
+
+# OlympicGames Dashboard
+
+The Olympic Dashboard provides various graphs representing data specific to target countries that have participated in the Olympic Games.
 
 This project was generated with [Angular CLI](https://github.com/angular/angular-cli) version 14.1.3.
 
@@ -6,24 +13,25 @@ Don't forget to install your node_modules before starting (`npm install` or `npm
 
 ## Development server
 
-Run `ng serve` for a dev server. Navigate to `http://localhost:4200/`. The application will automatically reload if you change any of the source files.
+Run `ng serve` for a dev server. Navigate to `http://localhost:4200/`.
 
 ## Build
 
 Run `ng build` to build the project. The build artifacts will be stored in the `dist/` directory.
 
-## Where to start
+## Technologies
+- Angular
+- SCSS 
+- ngx-chart
 
-As you can see, an architecture has already been defined for the project. It is just a suggestion, you can choose to use your own. The predefined architecture includes (in addition to the default angular architecture) the following:
+## Contribute to the project
 
-- `components` folder: contains every reusable components
-- `pages` folder: contains components used for routing
-- `core` folder: contains the business logic (`services` and `models` folders)
+No contrib.
 
-I suggest you to start by understanding this starter code. Pay an extra attention to the `app-routing.module.ts` and the `olympic.service.ts`.
+## Authors
 
-Once mastered, you should continue by creating the typescript interfaces inside the `models` folder. As you can see I already created two files corresponding to the data included inside the `olympic.json`. With your interfaces, improve the code by replacing every `any` by the corresponding interface.
+Axel Kermezian
 
-You're now ready to implement the requested features.
+## Licensing
 
-Good luck!
+This project was built under the Creative Commons licence.
