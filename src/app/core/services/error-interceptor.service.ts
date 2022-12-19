@@ -13,12 +13,23 @@ import { Router } from '@angular/router';
 @Injectable({
   providedIn: 'root'
 })
+
+/**
+ * Intercepts http errors issued 
+ */
 export class ErrorInterceptorService implements HttpInterceptor {
   constructor(private router:Router) {}
 
   private buidMessage(errorMessage :string,status : number) : string{
     return "ERROR " + status +". " + errorMessage +" \n ";
   }
+  /**
+   * Catch an http error and build the error message.
+   * Navigation to the error path is performed as well as passing the message as a parameter. 
+   * @param {HttpRequest<any>} request http request
+   * @param {HttpHandler} next 
+   * @returns Exception with the error build
+   */
   intercept(
       request: HttpRequest<any>,
       next: HttpHandler

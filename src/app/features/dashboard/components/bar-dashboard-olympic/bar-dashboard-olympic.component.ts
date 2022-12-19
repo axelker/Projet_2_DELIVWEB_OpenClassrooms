@@ -46,7 +46,9 @@ export class BarDashboardOlympicComponent implements OnInit,OnDestroy {
 
 
   }
-  //Get the id of current country by the params in route
+  /**
+   * Get the id of current country by the params in route
+   */
   initIdToSearch() : void {
     this.routeSub = this.activatedRoute.params.subscribe(params => {
       let id : number = Number(params['id']);
@@ -55,7 +57,9 @@ export class BarDashboardOlympicComponent implements OnInit,OnDestroy {
       }
     });
   }
-  //Init the data of the country  
+  /**
+   * Initialize the data of the country attribut
+   */
   initCountry() : void{
   
     this.countrySuscribe = this.olympicService.getOlympics().subscribe({
@@ -81,7 +85,11 @@ export class BarDashboardOlympicComponent implements OnInit,OnDestroy {
     });
     
   }
-  //Init the bart char with the data of country in parmeters
+
+  /**
+   * Initialize the bar chart with the data of country in parmeters
+   * @param country 
+   */
   initBarChart(country : OlympicCountry): void {
       let series : Array<DataChart> =[];
       let countMedals : number = 0;

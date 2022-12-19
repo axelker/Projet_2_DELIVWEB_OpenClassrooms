@@ -19,6 +19,10 @@ Run `ng serve` for a dev server. Navigate to `http://localhost:4200/`.
 
 Run `ng build` to build the project. The build artifacts will be stored in the `dist/` directory.
 
+## Generate the doc
+
+Run `npm run compodoc:serve` to generate the documentation and see her on the `http://localhost:8080/`.
+
 ## Technologies
 - Angular
 - SCSS 

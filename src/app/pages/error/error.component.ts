@@ -13,7 +13,9 @@ export class ErrorComponent implements OnInit {
   ngOnInit(): void {
     this.initError();
   }
-
+  /**
+   * Initializes the error provided in the routing parameters or redirects the user if the parameter is not provided.
+   */
   initError() : void{
     //Get the error passed in the route
     if(history.state.data){

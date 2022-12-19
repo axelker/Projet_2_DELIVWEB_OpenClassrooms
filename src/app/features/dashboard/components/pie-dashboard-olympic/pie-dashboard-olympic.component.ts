@@ -39,7 +39,9 @@ export class PieDashboardOlympicComponent implements OnInit,OnDestroy {
     Object.assign(this, this.single );
   }
 
-  //init the data of all countries in array 
+  /**
+   * Initialize the countries data in the arrayolympics attribute of the pie class
+   */
   initDataArrayOlympics() : void{
     this.olympics$ = this.olympicService.getOlympics(); 
     this.suscribe = this.olympics$.subscribe({      
@@ -55,7 +57,9 @@ export class PieDashboardOlympicComponent implements OnInit,OnDestroy {
     });
   }
 
-  //Init the data of the pie chart 
+  /**
+   * Initialize the data of the pie chart 
+   */
   initPie() : void{
     this.single=[];
     //Array to add the number of JOs participation of each country
@@ -76,7 +80,10 @@ export class PieDashboardOlympicComponent implements OnInit,OnDestroy {
     
   }
  
-  //Click on country
+  /**
+   * Define the action to run for the click on a country
+   * @param data the name or the datachart representing the country selected
+   */
   onSelect(data : DataChart | string): void {
     let country : Country | undefined = undefined;
     
